@@ -1,0 +1,23 @@
+{
+  "name": "woowahan-action-player",
+  "version": "0.1.0",
+  "description": "action flow control middleware for woowahanjs",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woowabros/woowahan-action-player.git"
+  },
+  "keywords": [
+    "woowahanjs",
+    "middleware"
+  ],
+  "author": "Woowabros",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/woowabros/woowahan-action-player/issues"
+  },
+  "homepage": "https://github.com/woowabros/woowahan-action-player#readme"
+}
