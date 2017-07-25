@@ -1,6 +1,6 @@
 {
   "name": "woowahan-action-player",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "action flow control middleware for woowahanjs",
   "main": "lib/index.js",
   "scripts": {
