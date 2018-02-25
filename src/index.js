@@ -67,7 +67,7 @@ export default function Dispatcher() {
           };
 
           if (sequenceProcessing) {
-            this[actionName] = function() {
+            this[actionName] = function(userData) {
               if (!initPreventDupliateCall()) return;
 
               const promiseTasks = tasks.map(__action__ => {
@@ -99,7 +99,7 @@ export default function Dispatcher() {
               promiseTasks.reduce((cur, next) => cur.then(next), Promise.resolve())
                 .then(function(data) {
                   washingDishes();
-                  finish.call(context, data);
+                  finish.call(context, data, userData);
                 })
                 .catch(function() {
                   washingDishes();
@@ -107,7 +107,7 @@ export default function Dispatcher() {
                 });
             }.bind(this);
           } else {
-            this[actionName] = function() {
+            this[actionName] = function(userData) {
               if (!initPreventDupliateCall()) return;
 
               if (preventDupliateCall) {
@@ -145,10 +145,10 @@ export default function Dispatcher() {
                   let result = { };
 
                   if (data.length === 1 && actionList.length === 1) {
-                    finish.apply(context, [data[0][actionList[0]].err, data[0][actionList[0]].resp]);
+                    finish.apply(context, [data[0][actionList[0]].err, data[0][actionList[0]].resp, userData]);
                   } else {
                     actionList.forEach(actionName => result[actionName] = data.find(d => actionName in d)[actionName] );
-                    finish.call(context, result);
+                    finish.call(context, result, userData);
                   }
 
                   washingDishes();

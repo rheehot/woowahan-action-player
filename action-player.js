@@ -77,7 +77,7 @@ function Dispatcher() {
           };
 
           if (sequenceProcessing) {
-            this[actionName] = function () {
+            this[actionName] = function (userData) {
               if (!initPreventDupliateCall()) return;
 
               var promiseTasks = tasks.map(function (__action__) {
@@ -108,14 +108,14 @@ function Dispatcher() {
                 return cur.then(next);
               }, Promise.resolve()).then(function (data) {
                 washingDishes();
-                finish.call(context, data);
+                finish.call(context, data, userData);
               }).catch(function () {
                 washingDishes();
                 console.warn('악!');
               });
             }.bind(this);
           } else {
-            this[actionName] = function () {
+            this[actionName] = function (userData) {
               if (!initPreventDupliateCall()) return;
 
               if (preventDupliateCall) {
@@ -148,14 +148,14 @@ function Dispatcher() {
                 var result = {};
 
                 if (data.length === 1 && actionList.length === 1) {
-                  finish.apply(context, [data[0][actionList[0]].err, data[0][actionList[0]].resp]);
+                  finish.apply(context, [data[0][actionList[0]].err, data[0][actionList[0]].resp, userData]);
                 } else {
                   actionList.forEach(function (actionName) {
                     return result[actionName] = data.find(function (d) {
                       return actionName in d;
                     })[actionName];
                   });
-                  finish.call(context, result);
+                  finish.call(context, result, userData);
                 }
 
                 washingDishes();
