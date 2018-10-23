@@ -41,7 +41,7 @@ function Dispatcher() {
           /*
            작업을 실행하는 기본 순서는 병렬 실행이다.
            */
-          var preventDupliateCall = actionValue.preventDupliateCall || false;
+          var preventDupliateCall = actionValue.preventDuplicateCall || actionValue.preventDupliateCall || false;
           var sequenceProcessing = actionValue.sequence || false;
           var tasks = Array.isArray(actionValue.tasks) ? actionValue.tasks : [actionValue.tasks];
           var finish = typeof actionValue.finish === 'function' ? actionValue.finish : context[actionValue.finish];
