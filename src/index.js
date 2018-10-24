@@ -27,7 +27,7 @@ export default function Dispatcher() {
           /*
            작업을 실행하는 기본 순서는 병렬 실행이다.
            */
-          const preventDupliateCall = actionValue.preventDupliateCall || false;
+          const preventDupliateCall = actionValue.preventDuplicateCall || actionValue.preventDupliateCall || false;
           const sequenceProcessing = actionValue.sequence || false;
           const tasks = Array.isArray(actionValue.tasks)
             ? actionValue.tasks : [actionValue.tasks];
